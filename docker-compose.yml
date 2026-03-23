@@ -1,0 +1,29 @@
+services:
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - "POSTGRES_DB=legio_access_db"
+      - "POSTGRES_USER=admin"
+      - "POSTGRES_PASSWORD=Legio2705."
+    ports:
+      - "5433:5432" # Usamos 5433 para no chocar con tu Postgres de Windows
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - "DB_NAME=legio_access_db"
+      - "DB_USER=admin"
+      - "DB_PASSWORD=Legio2705."
+      - "DB_HOST=db"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
