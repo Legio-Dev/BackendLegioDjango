@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure--+%6hpj4u3l27$8ls%cq4^!#ge$&++u17(9g-y8648vb=r1y9i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# 1. Permitir que Django reciba peticiones de cualquier IP de la red
+ALLOWED_HOSTS = ['*', '192.168.110.120', 'localhost']
 
 
 # Application definition
@@ -133,7 +134,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "http://192.168.110.118:5173",
+    "http://192.168.110.147:5173",
 ]
 
 REST_FRAMEWORK = {
