@@ -1,0 +1,40 @@
+from django.db import models
+
+class TipoInvitacion(models.Model):
+    nombre = models.CharField(max_length=100)
+    creado_por = models.ForeignKey('cuentas.Cuenta', on_delete=models.CASCADE)
+    activo = models.BooleanField(default=True)
+    departamento = models.ForeignKey('entidades.Departamento', on_delete=models.CASCADE)
+
+class Vehiculo(models.Model):
+    placa = models.CharField(max_length=20, unique=True)
+    marca = models.CharField(max_length=50, null=True, blank=True)
+    modelo = models.CharField(max_length=50, null=True, blank=True)
+    color = models.CharField(max_length=30, null=True, blank=True)
+    tipo = models.CharField(max_length=30, null=True, blank=True)
+
+class Invitacion(models.Model):
+    cuenta = models.ForeignKey('cuentas.Cuenta', on_delete=models.CASCADE, null=True, blank=True)
+    usuario = models.ForeignKey('usuarios.Usuario', on_delete=models.CASCADE)
+    nombre_contacto = models.CharField(max_length=255)
+    celular_contacto = models.CharField(max_length=20)
+    correo_contacto = models.EmailField(max_length=255)
+    locacion = models.ForeignKey('entidades.Locacion', on_delete=models.SET_NULL, null=True)
+    departamento = models.ForeignKey('entidades.Departamento', on_delete=models.SET_NULL, null=True)
+    tipo_invitacion = models.ForeignKey(TipoInvitacion, on_delete=models.SET_NULL, null=True)
+    motivo = models.ForeignKey('entidades.MotivoVisita', on_delete=models.SET_NULL, null=True)
+    detalles = models.TextField(null=True, blank=True)
+    estado_invitacion = models.CharField(max_length=255)
+    cedula = models.CharField(max_length=10, null=True, blank=True)
+    nombre_completo = models.CharField(max_length=255, null=True, blank=True)
+    foto_rostro_url = models.URLField(max_length=255, null=True, blank=True)
+    tipo_ingreso = models.CharField(max_length=50, null=True, blank=True)
+    vehiculo = models.ForeignKey(Vehiculo, on_delete=models.SET_NULL, null=True, blank=True)
+    foto_vehiculo_url = models.URLField(max_length=255, null=True, blank=True)
+    equipo = models.BooleanField(default=False)
+    foto_equipo_url = models.URLField(max_length=255, null=True, blank=True)
+    documentos = models.BooleanField(default=False)
+    documentos_zip = models.URLField(max_length=255, null=True, blank=True)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_ingreso = models.DateTimeField(null=True, blank=True)
+    fecha_salida = models.DateTimeField(null=True, blank=True)
