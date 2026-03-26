@@ -26,7 +26,18 @@ SECRET_KEY = 'django-insecure--+%6hpj4u3l27$8ls%cq4^!#ge$&++u17(9g-y8648vb=r1y9i
 DEBUG = True
 
 # 1. Permitir que Django reciba peticiones de cualquier IP de la red
-ALLOWED_HOSTS = ['*', '192.168.110.120', 'localhost', '100.109.15.55']
+ALLOWED_HOSTS = [
+    'localhost', 
+    '127.0.0.1',
+    '100.125.105.54',
+    '100.109.15.55',
+    ]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://100.109.15.55:5173",
+    "http://192.168.110.147:5173",
+    "http://100.109.15.55",
+]
 
 # Application definition
 INSTALLED_APPS = [
@@ -120,11 +131,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOWED_ORIGINS = [
-    "http://100.109.15.55:5173",
-    "http://192.168.110.147:5173",
-]
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -143,3 +149,6 @@ SIMPLE_JWT = {
     'SIGNING_KEY': SECRET_KEY,
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
+
+# Formato: 'nombre_de_la_app.NombreDelModelo'
+AUTH_USER_MODEL = 'usuarios.Usuario'
