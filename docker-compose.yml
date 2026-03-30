@@ -22,6 +22,7 @@ services:
       - "DB_USER=admin"
       - "DB_PASSWORD=Legio2705."
       - "DB_HOST=db"
+      - "DJANGO_SETTINGS_MODULE=legio_access.settings"
     depends_on:
       - db
 
